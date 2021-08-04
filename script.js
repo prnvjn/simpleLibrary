@@ -79,6 +79,17 @@ row.innerHTML =`<td>${element.title}</td>
 
 }
 
+const deleteBook =(element)=>{
+  let delBtn = document.querySelectorAll("#delete")
+  console.log(delBtn)
+    delBtn.forEach( item => {
+      item.addEventListener('click' , (e)=>{
+        console.log(e.target.element)
+      })
+    })
+}
+
+
 
 submit.addEventListener('click',() => {
     let title = document.querySelector('#title').value
@@ -89,7 +100,8 @@ submit.addEventListener('click',() => {
     let submission = new Book(title,author,pages,read)
     myLibrary.push(submission)
     addBookToLibrary(submission)
-    
+    deleteBook(submission)
+
 
 })
 
@@ -97,8 +109,5 @@ submit.addEventListener('click',() => {
 const test1 =  new Book("hey","this","33",true)
 myLibrary.push(test1)
 addBookToLibrary(test1)
-
-
-
-
+deleteBook(test1)
 
