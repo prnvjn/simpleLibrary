@@ -53,6 +53,7 @@ let createBook = (item)=> {
 let myLibrary =[]
 let submit = document.querySelector("#submit")
 let library = document.querySelector("#library")
+let counter = 0
  function Book(title, author,pages,read){
   this.title = title
   this.author = author
@@ -67,26 +68,33 @@ let library = document.querySelector("#library")
 
  const addBookToLibrary = (element)=> {
   let row = document.createElement('tr')
-library.appendChild(row)
+  
+  row.classList = 'row'
+  row.setAttribute("id",counter++)
+  library.appendChild(row)
+
+
 row.innerHTML =`<td>${element.title}</td>
 <td>${element.author}</td>
 <td>${element.pages}</td>
 <td>${element.read}</td> 
-<td> <button id="delete">Delete</button></td>
+<td> <button class ="delete" >Delete</button></td>
 `
 
 
 
 }
 
-const deleteBook =(element)=>{
-  let delBtn = document.querySelectorAll("#delete")
-  console.log(delBtn)
-    delBtn.forEach( item => {
-      item.addEventListener('click' , (e)=>{
-        console.log(e.target.element)
-      })
-    })
+const deleteBook =(e)=>{
+  if (!e.target.classList.contains("delete")) {
+    return;
+  }
+
+  const btn = e.target;
+  let value = btn.parentNode.parentNode.rowIndex
+  myLibrary.splice(value-1,1)
+  test =  btn.closest("tr").remove();
+  console.log(myLibrary)
 }
 
 
@@ -100,11 +108,11 @@ submit.addEventListener('click',() => {
     let submission = new Book(title,author,pages,read)
     myLibrary.push(submission)
     addBookToLibrary(submission)
-    deleteBook(submission)
+   
 
 
 })
-
+library.addEventListener('click',deleteBook)
 
 const test1 =  new Book("hey","this","33",true)
 myLibrary.push(test1)
