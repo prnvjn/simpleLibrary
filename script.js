@@ -68,18 +68,28 @@ let counter = 0
 
  const addBookToLibrary = (element)=> {
   let row = document.createElement('tr')
-  
   row.classList = 'row'
   row.setAttribute("id",counter++)
+
+  let dataTitle = document.createElement('td')
+  dataTitle.textContent = element.title
+  
+  let dataAuthor = document.createElement('td')
+  dataAuthor.textContent = element.author
+
+  let dataPages = document.createElement('td')
+  dataPages.textContent = element.pages
+
+  let dataRead = document.createElement('td')
+  dataRead.textContent = element.read
+
+  let delBtn = document.createElement('button')
+  delBtn.textContent = "delete"
+  delBtn.classList = "delete"
+  row.append(dataTitle,dataAuthor,dataPages,dataRead,delBtn)
+
+
   library.appendChild(row)
-
-
-row.innerHTML =`<td>${element.title}</td>
-<td>${element.author}</td>
-<td>${element.pages}</td>
-<td>${element.read}</td> 
-<td> <button class ="delete" >Delete</button></td>
-`
 
 
 
@@ -91,13 +101,12 @@ const deleteBook =(e)=>{
   }
 
   const btn = e.target;
-  let value = btn.parentNode.parentNode.rowIndex
+  let value = btn.parentNode.rowIndex
   myLibrary.splice(value-1,1)
-  test =  btn.closest("tr").remove();
-  console.log(myLibrary)
+  btn.parentNode.remove()
+  
+
 }
-
-
 
 submit.addEventListener('click',() => {
     let title = document.querySelector('#title').value
