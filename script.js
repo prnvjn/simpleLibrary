@@ -51,6 +51,7 @@ let createBook = (item)=> {
 }
  */
 let myLibrary =[]
+let myForm = document.querySelector('myForm')
 let submit = document.querySelector("#submit")
 let library = document.querySelector("#library")
 let counter = 0
@@ -117,6 +118,7 @@ submit.addEventListener('click',() => {
     let submission = new Book(title,author,pages,read)
     myLibrary.push(submission)
     addBookToLibrary(submission)
+    
    
 
 
